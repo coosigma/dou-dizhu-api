@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
+    "lib": ["es6"],
+    "types": ["reflect-metadata", "jest", "node"],
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
@@ -19,7 +23,10 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@/*": ["src/*"],
-      "@model/*": ["src/model/*"]
+      "@model/*": ["src/model/*"],
+      "@controller/*": ["src/controller/*"],
+      "@service/*": ["src/service/*"],
+      "@module/*": ["src/module/*"],
     }
   }
 }
