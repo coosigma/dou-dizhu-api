@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Dialect } from 'sequelize/types';
 import { CfgFactory } from './cfg-factory';
 import { Configuration } from './configuration';
 import configJson from './default.config.json';
@@ -10,9 +9,8 @@ export class CfgFactoryImpl implements CfgFactory {
 
 	public getOrCreateConfiguration(): Configuration {
 		if (!this.configuration) {
-			const typedConfig: Configuration = undefined;
-			typedConfig.db.options.dialect = configJson.db.options.dialect as Dialect;
-			this.configuration = typedConfig;
+			const typedConfig: unknown = configJson;
+			this.configuration = typedConfig as Configuration;
 		}
 
 		return this.configuration;

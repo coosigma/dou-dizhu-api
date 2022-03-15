@@ -1,12 +1,9 @@
-import { SequelizeOptions } from 'sequelize-typescript';
-
 export interface Configuration {
 	db: {
 		database: string;
 		username: string;
 		password: string;
-		options?: SequelizeOptions;
+		dialect: string;
+		storage: string;
 	};
 }
-
-export const ConfigurationType = 'Configuration';

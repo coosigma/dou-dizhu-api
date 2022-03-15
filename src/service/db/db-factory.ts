@@ -1,16 +1,19 @@
 import { Sequelize } from 'sequelize-typescript';
+import { configurationType } from '@service/config/cfg-factory';
+import { Configuration } from '@service/config/configuration';
 import { DbFactoryImpl } from './db-factory.impl';
 
 export interface DbFactory {
-	getOrCreateConnection(): Sequelize;
+	getOrCreateConnection(): Promise<Sequelize>;
 }
 
 export const databaseSymbol = Symbol('Database');
 
 export const databaseFactory = {
 	provide: databaseSymbol,
-	useFactory: (dbFactoryImpl: DbFactoryImpl) => {
-		return dbFactoryImpl.getOrCreateConnection();
+	useFactory: async (configuration: Configuration) => {
+		const database = new DbFactoryImpl(configuration);
+		return await database.getOrCreateConnection();
 	},
-	inject: [DbFactoryImpl],
+	inject: [configurationType],
 };

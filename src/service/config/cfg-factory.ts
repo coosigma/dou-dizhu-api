@@ -9,8 +9,8 @@ export const configurationType = Symbol('Configuration');
 
 export const configurationFactory = {
 	provide: configurationType,
-	useFactory: (cfgFactoryImpl: CfgFactoryImpl) => {
-		return cfgFactoryImpl.getOrCreateConfiguration();
+	useFactory: () => {
+		const configuration = new CfgFactoryImpl();
+		return configuration.getOrCreateConfiguration();
 	},
-	inject: [CfgFactoryImpl],
 };

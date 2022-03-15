@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Configuration } from '@service/config/configuration';
 import { configurationType } from '@service/config/cfg-factory';
 import { DbFactory } from './db-factory';
+import { Dialect } from 'sequelize/types';
 
 @Injectable()
 export class DbFactoryImpl implements DbFactory {
@@ -10,13 +11,18 @@ export class DbFactoryImpl implements DbFactory {
 
 	constructor(@Inject(configurationType) private config: Configuration) {}
 
-	public getOrCreateConnection(): Sequelize {
+	public async getOrCreateConnection(): Promise<Sequelize> {
 		if (!this.connection) {
-			const config = this.config.db;
-			this.connection = new Sequelize(config);
+			const { dialect, ...rest } = this.config.db;
+			const typedConfig = {
+				dialect: dialect as Dialect,
+				...rest,
+			};
+
+			this.connection = new Sequelize(typedConfig);
 			this.connection.addModels(['@service/model/*']);
 		}
-
+		this.connection.sync();
 		return this.connection;
 	}
 }
