@@ -1,11 +1,11 @@
-import { Card } from '@model/card';
+import Card from '@model/card';
 
 export enum PlayingRole {
 	Landlord,
 	Farmer,
 }
 
-export interface Player {
+export default interface Player {
 	id: string;
 	name: string;
 	role: PlayingRole;

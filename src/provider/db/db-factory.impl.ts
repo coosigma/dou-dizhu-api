@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { Configuration } from '@service/config/configuration';
-import { configurationType } from '@service/config/cfg-factory';
+import { Configuration } from '@provider/config/configuration';
+import { configurationType } from '@provider/config/cfg-factory';
 import { DbFactory } from './db-factory';
 import { Dialect } from 'sequelize/types';
 

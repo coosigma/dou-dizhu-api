@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
-import { configurationType } from '@service/config/cfg-factory';
-import { Configuration } from '@service/config/configuration';
+import { configurationType } from '@provider/config/cfg-factory';
+import { Configuration } from '@provider/config/configuration';
 import { DbFactoryImpl } from './db-factory.impl';
 
 export interface DbFactory {

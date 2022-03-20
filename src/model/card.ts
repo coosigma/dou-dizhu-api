@@ -23,7 +23,7 @@ export enum CardFigure {
 	ColouredJoker,
 }
 
-export interface Card {
-	suit: CardSuit;
+export default interface Card {
+	suit?: CardSuit;
 	figure: CardFigure;
 }
