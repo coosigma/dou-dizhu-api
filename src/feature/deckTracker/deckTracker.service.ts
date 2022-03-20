@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import Deck from '@model/deck';
-import { CardFigure, CardSuit } from '@model/card';
+import { CardFigure } from '@model/card';
 
 @Injectable()
 export class DeckTrackerService {
@@ -9,17 +9,13 @@ export class DeckTrackerService {
 	public getOrCreateDeck(): Deck {
 		if (!this.deck) {
 			this.deck = {
-				leftoverForLord: [undefined, undefined, undefined],
-				wholeDeck: [],
+				wholeDeck: new Map<string, number>(),
 			};
 			for (let figure = 0; figure < Object.keys(CardFigure).length / 2; ++figure) {
-				this.deck.wholeDeck[figure] = [];
 				if (figure >= CardFigure.GreyJoker) {
-					this.deck.wholeDeck[figure][0] = true;
+					this.deck.wholeDeck[CardFigure[figure]] = 1;
 				} else {
-					for (let suit = 0; suit < Object.keys(CardSuit).length / 2; ++suit) {
-						this.deck.wholeDeck[figure][suit] = true;
-					}
+					this.deck.wholeDeck[CardFigure[figure]] = 4;
 				}
 			}
 		}
